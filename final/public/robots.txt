@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /contact
+Allow: /learn
+Disallow: /
+Disallow: /new-scan
+Disallow: /scan-result
+Disallow: /skin-map
+Disallow: /history
+Disallow: /reminders
+Disallow: /profile
+Disallow: /settings
+Sitemap: /sitemap.xml

@@ -1,0 +1,155 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* SkinScan AI Design System
+   All colors HSL. Calm, friendly, clean health companion aesthetic.
+*/
+
+@layer base {
+  :root {
+    --background: 150 17% 97%;          /* #F7F9F8 */
+    --foreground: 0 0% 10%;             /* #1A1A1A */
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+
+    --primary: 170 47% 33%;             /* #2D7D6F calming teal-green */
+    --primary-foreground: 0 0% 100%;
+    --primary-dark: 170 49% 24%;        /* #1F5C52 */
+    --primary-light: 165 38% 93%;       /* #E8F5F2 */
+
+    --secondary: 165 38% 93%;
+    --secondary-foreground: 170 49% 24%;
+
+    --muted: 165 38% 95%;
+    --muted-foreground: 161 8% 39%;     /* #5C6B66 */
+
+    --accent: 165 38% 93%;
+    --accent-foreground: 170 49% 24%;
+
+    --destructive: 0 73% 50%;           /* #DC2626 */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 162 28% 90%;              /* #E2EEEB */
+    --input: 162 28% 90%;
+    --ring: 170 47% 33%;
+
+    --radius: 0.875rem;                 /* 14px cards */
+
+    /* Risk level palette (exact spec values) */
+    --risk-reassuring-bg: 152 47% 93%;      /* #E8F5F0 */
+    --risk-reassuring-fg: 152 47% 26%;      /* #1A6B4A */
+    --risk-watch-bg: 48 96% 89%;            /* #FEF3C7 */
+    --risk-watch-fg: 28 84% 31%;            /* #92400E */
+    --risk-soon-bg: 19 100% 95%;            /* #FFF0E8 */
+    --risk-soon-fg: 18 80% 33%;             /* #9A3412 */
+    --risk-urgent-bg: 0 93% 94%;            /* #FEE2E2 */
+    --risk-urgent-fg: 0 74% 35%;            /* #991B1B */
+
+    /* Generic indicators */
+    --reassuring: 152 56% 39%;          /* #2D9B6F */
+    --watch: 32 95% 44%;                /* #D97706 */
+    --see-doctor-soon: 18 78% 49%;      /* #E05C1A */
+    --urgent: 0 73% 50%;                /* #DC2626 */
+
+    --shadow-card: 0 2px 8px rgba(0,0,0,0.07);
+    --shadow-card-hover: 0 4px 16px rgba(0,0,0,0.09);
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 10%;
+    --sidebar-primary: 170 47% 33%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 165 38% 93%;
+    --sidebar-accent-foreground: 170 49% 24%;
+    --sidebar-border: 162 28% 90%;
+    --sidebar-ring: 170 47% 33%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+
+  html { font-family: 'DM Sans', system-ui, sans-serif; }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  h1 { font-size: 28px; line-height: 1.2; }
+  h2 { font-size: 22px; line-height: 1.25; }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .card-soft {
+    @apply bg-card rounded-[14px] p-6;
+    box-shadow: var(--shadow-card);
+  }
+  .card-soft-hover {
+    @apply transition-shadow;
+  }
+  .card-soft-hover:hover { box-shadow: var(--shadow-card-hover); }
+
+  .container-narrow {
+    @apply mx-auto px-4;
+    max-width: 900px;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-primary text-primary-foreground font-semibold;
+    padding: 12px 24px;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+    transition: background-color 0.15s ease;
+  }
+  .btn-primary:hover:not(:disabled) { background: hsl(var(--primary-dark)); }
+  .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center rounded-full font-semibold border;
+    background: transparent;
+    border-color: hsl(var(--border));
+    color: hsl(var(--foreground));
+    padding: 12px 24px;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+  }
+  .btn-ghost:hover { background: hsl(var(--primary-light)); }
+
+  .pulse-soft {
+    animation: pulseSoft 2s ease-in-out infinite;
+  }
+  @keyframes pulseSoft {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.02); }
+  }
+
+  .fade-in { animation: fadeIn 0.35s ease-out; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  .input-field {
+    @apply w-full rounded-[10px] border bg-card px-4 py-3 text-foreground;
+    border-color: hsl(var(--border));
+    font-size: 14px;
+    transition: border-color 0.15s;
+  }
+  .input-field:focus { border-color: hsl(var(--primary)); outline: none; box-shadow: 0 0 0 3px hsl(var(--primary-light)); }
+}
